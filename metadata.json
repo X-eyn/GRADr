@@ -1,0 +1,7 @@
+{
+  "name": "ScriptGrader AI",
+  "description": "An intelligent academic script checker that grades handwritten or typed answers from images, providing detailed feedback and corrections.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
