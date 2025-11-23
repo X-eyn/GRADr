@@ -33,20 +33,20 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, onReset }) => {
             <div className="h-px w-8 bg-white"></div>
             Reviewer Feedback
           </h3>
-          <p className="text-neutral-300 text-xl leading-relaxed font-light">"{result.feedback}"</p>
+          <p className="text-neutral-300 text-xl leading-relaxed font-coolvetica">"{result.feedback}"</p>
         </div>
       </div>
 
       {/* Reasoning Section */}
       <div className="bg-black rounded-3xl shadow-sm border border-white/10 p-8">
         <h3 className="text-lg font-medium text-white mb-4">Detailed Reasoning</h3>
-        <p className="text-neutral-400 leading-relaxed font-light">{result.reasoning}</p>
+        <p className="text-neutral-400 leading-relaxed font-coolvetica">{result.reasoning}</p>
       </div>
 
       {/* Diff View */}
       <div className="space-y-6">
          <div className="flex items-center justify-between px-2">
-            <h2 className="text-2xl font-bold text-white tracking-tight">Transcription & Grading</h2>
+            <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 font-lemon-milk tracking-tight">Transcription & Grading</h2>
          </div>
          <DiffView original={result.extractedText} corrected={result.correctedText} />
       </div>

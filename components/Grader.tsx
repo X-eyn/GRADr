@@ -58,10 +58,10 @@ const Grader: React.FC<GraderProps> = ({ subject = 'General' }) => {
               {subject === 'General' && '📝'}
             </span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-white">
-            GRADr <span className="text-neutral-500 font-light text-3xl md:text-5xl block md:inline mt-2 md:mt-0 md:ml-4">{subject}</span>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 pb-2 font-lemon-milk">
+            GRADr <span className="text-neutral-500 font-coolvetica font-light text-3xl md:text-5xl block md:inline mt-2 md:mt-0 md:ml-4">{subject}</span>
           </h1>
-          <p className="text-xl text-neutral-400 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-xl text-neutral-400 max-w-2xl mx-auto font-coolvetica leading-relaxed">
             Upload your {subject === 'General' ? '' : subject} homework or exam paper. 
             Our dedicated AI will grade it with specific {subject.toLowerCase()} context.
           </p>
@@ -82,7 +82,7 @@ const Grader: React.FC<GraderProps> = ({ subject = 'General' }) => {
                  <div className="w-12 h-12 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
                  <div>
                     <h3 className="text-2xl font-medium text-white mb-2 tracking-tight">Analyzing {subject} Script</h3>
-                    <p className="text-neutral-500 font-light">Deciphering handwriting & checking logic...</p>
+                    <p className="text-neutral-500 font-coolvetica">Deciphering handwriting & checking logic...</p>
                  </div>
                </div>
             </div>
@@ -96,7 +96,7 @@ const Grader: React.FC<GraderProps> = ({ subject = 'General' }) => {
                     </svg>
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Analysis Failed</h3>
-                <p className="text-neutral-400 mb-8 font-light">{errorMsg}</p>
+                <p className="text-neutral-400 mb-8 font-coolvetica">{errorMsg}</p>
                 <button 
                     onClick={handleReset}
                     className="bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-neutral-200 transition-colors"

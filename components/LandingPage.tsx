@@ -23,14 +23,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false }
           <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 pb-2 font-lemon-milk">
             GRADr
           </h1>
-          <div className="text-xl md:text-2xl text-neutral-400 font-light max-w-2xl mx-auto leading-relaxed flex flex-col gap-2">
+          <div className="text-xl md:text-2xl text-neutral-400 font-coolvetica max-w-2xl mx-auto leading-relaxed flex flex-col gap-2">
             <p>
               Transform handwriting into graded feedback instantly. 
             </p>
             <p>
               Experience the next generation of assessment.
             </p>
-            <div className="flex items-center justify-center gap-2 mt-4 text-xl md:text-2xl font-light text-neutral-400">
+            <div className="flex items-center justify-center gap-2 mt-4 text-xl md:text-2xl font-coolvetica text-neutral-400">
               <span>Grade your</span>
               <RotatingText
                 texts={['Biology', 'Physics', 'English', 'Chemistry']}
