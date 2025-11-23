@@ -59,3 +59,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+
+.font-lemon-milk {
+  font-family: 'LEMON MILK', sans-serif;
+}
