@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import ImageUpload from './ImageUpload';
 import ResultCard from './ResultCard';
+import BiologyResultCard from './BiologyResultCard';
+import PhysicsResultCard from './PhysicsResultCard';
+import ChemistryResultCard from './ChemistryResultCard';
+import EnglishResultCard from './EnglishResultCard';
 import { analyzeScript } from '../services/geminiService';
 import { AppStatus, AssessmentResult } from '../types';
 import GradientText from './GradientText';
@@ -157,7 +161,13 @@ const Grader: React.FC<GraderProps> = ({ subject = 'General', onNavigateHome }) 
           )}
 
           {status === AppStatus.SUCCESS && result && (
-            <ResultCard result={result} onReset={handleReset} />
+            <>
+              {subject === 'Biology' && <BiologyResultCard result={result} onReset={handleReset} />}
+              {subject === 'Physics' && <PhysicsResultCard result={result} onReset={handleReset} />}
+              {subject === 'Chemistry' && <ChemistryResultCard result={result} onReset={handleReset} />}
+              {subject === 'English' && <EnglishResultCard result={result} onReset={handleReset} />}
+              {subject === 'General' && <ResultCard result={result} onReset={handleReset} />}
+            </>
           )}
 
         </main>

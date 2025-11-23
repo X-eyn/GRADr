@@ -1,3 +1,12 @@
+export interface QuestionFeedback {
+  questionNumber: string;
+  questionTitle: string;
+  studentAnswer: string;
+  correctAnswer: string;
+  insight: string;
+  status: 'correct' | 'incorrect' | 'partial';
+}
+
 export interface AssessmentResult {
   grade: string;
   score: number;
@@ -5,6 +14,15 @@ export interface AssessmentResult {
   extractedText: string;
   correctedText: string;
   feedback: string;
+  uploadedImage?: string;
+  questions?: QuestionFeedback[];
+  actionItems?: string[];
+  stats?: {
+    questionsCorrect: number;
+    questionsTotal: number;
+    grammarLevel: string;
+    conceptsLevel: string;
+  };
 }
 
 export enum AppStatus {
