@@ -1,66 +1,86 @@
-import { CalendarIcon, FileTextIcon } from "@radix-ui/react-icons";
-import { BellIcon, Share2Icon } from "lucide-react";
+import { FileTextIcon, CheckCircledIcon } from "@radix-ui/react-icons";
+import { BellIcon, BookOpen, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
 import AnimatedBeamMultipleOutputDemo from "@/components/AnimatedBeamDemo";
 import AnimatedListDemo from "@/components/AnimatedListDemo";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { Marquee } from "@/components/ui/marquee";
 
-const files = [
+const gradedAssignments = [
   {
-    name: "bitcoin.pdf",
-    body: "Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto.",
+    name: "Biology Essay",
+    subject: "Biology",
+    grade: "A+",
+    score: "95/100",
+    body: "Excellent analysis of cellular respiration. Clear diagrams and well-structured arguments.",
   },
   {
-    name: "finances.xlsx",
-    body: "A spreadsheet or worksheet is a file made of rows and columns that help sort data, arrange data easily, and calculate numerical data.",
+    name: "Physics Problem Set",
+    subject: "Physics",
+    grade: "A",
+    score: "88/100",
+    body: "Strong understanding of Newton's laws. Minor calculation errors in question 3.",
   },
   {
-    name: "logo.svg",
-    body: "Scalable Vector Graphics is an Extensible Markup Language-based vector image format for two-dimensional graphics with support for interactivity and animation.",
+    name: "Chemistry Lab Report",
+    subject: "Chemistry",
+    grade: "B+",
+    score: "82/100",
+    body: "Good experimental procedure. Consider adding more detailed observations.",
   },
   {
-    name: "keys.gpg",
-    body: "GPG keys are used to encrypt and decrypt email, files, directories, and whole disk partitions and to authenticate messages.",
+    name: "English Composition",
+    subject: "English",
+    grade: "A-",
+    score: "90/100",
+    body: "Compelling narrative with strong vocabulary. Watch for comma splices.",
   },
   {
-    name: "seed.txt",
-    body: "A seed phrase, seed recovery phrase or backup seed phrase is a list of words which store all the information needed to recover Bitcoin funds on-chain.",
+    name: "Math Calculus Quiz",
+    subject: "Mathematics",
+    grade: "A+",
+    score: "98/100",
+    body: "Exceptional work on derivatives and integrals. Perfect methodology.",
   },
 ];
 
 const features = [
   {
     Icon: FileTextIcon,
-    name: "Save your files",
-    description: "We automatically save your files as you type.",
+    name: "Instant Grading",
+    description: "Get your assignments graded in seconds with detailed feedback.",
     href: "#",
-    cta: "Learn more",
+    cta: "Try it now",
     className: "col-span-3 lg:col-span-1",
     background: (
       <Marquee
         pauseOnHover
         className="absolute top-10 [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] [--duration:20s]"
       >
-        {files.map((f, idx) => (
+        {gradedAssignments.map((assignment, idx) => (
           <figure
             key={idx}
             className={cn(
-              "relative w-32 cursor-pointer overflow-hidden rounded-xl border p-4",
+              "relative w-40 cursor-pointer overflow-hidden rounded-xl border p-4",
               "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
               "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
               "transform-gpu blur-[1px] transition-all duration-300 ease-out hover:blur-none"
             )}
           >
-            <div className="flex flex-row items-center gap-2">
+            <div className="flex flex-row items-center justify-between gap-2">
               <div className="flex flex-col">
                 <figcaption className="text-sm font-medium dark:text-white">
-                  {f.name}
+                  {assignment.name}
                 </figcaption>
+                <p className="text-xs text-gray-500 dark:text-gray-400">{assignment.subject}</p>
               </div>
+              <span className="text-lg font-bold text-green-600 dark:text-green-400">
+                {assignment.grade}
+              </span>
             </div>
-            <blockquote className="mt-2 text-xs">{f.body}</blockquote>
+            <blockquote className="mt-2 text-xs text-gray-600 dark:text-gray-300">
+              {assignment.body}
+            </blockquote>
           </figure>
         ))}
       </Marquee>
@@ -68,39 +88,65 @@ const features = [
   },
   {
     Icon: BellIcon,
-    name: "Notifications",
-    description: "Get notified when something happens.",
+    name: "Real-Time Feedback",
+    description: "Receive instant notifications when your work is graded and reviewed.",
     href: "#",
-    cta: "Learn more",
+    cta: "View feedback",
     className: "col-span-3 lg:col-span-2",
     background: (
       <AnimatedListDemo className="absolute top-4 right-2 h-[300px] w-full scale-75 border-none [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-90" />
     ),
   },
   {
-    Icon: Share2Icon,
-    name: "Integrations",
-    description: "Supports 100+ integrations and counting.",
+    Icon: BookOpen,
+    name: "Multi-Subject Support",
+    description: "Biology, Physics, Chemistry, English, Math, and more. All graded accurately.",
     href: "#",
-    cta: "Learn more",
+    cta: "See subjects",
     className: "col-span-3 lg:col-span-2",
     background: (
       <AnimatedBeamMultipleOutputDemo className="absolute top-4 right-2 h-[300px] border-none [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-105" />
     ),
   },
   {
-    Icon: CalendarIcon,
-    name: "Calendar",
-    description: "Use the calendar to filter your files by date.",
+    Icon: TrendingUp,
+    name: "Progress Tracking",
+    description: "Monitor your improvement over time with detailed analytics.",
     className: "col-span-3 lg:col-span-1",
     href: "#",
-    cta: "Learn more",
+    cta: "View stats",
     background: (
-      <Calendar
-        mode="single"
-        selected={new Date(2022, 4, 11, 0, 0, 0)}
-        className="absolute top-10 right-0 origin-top scale-75 rounded-md border [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-90"
-      />
+      <div className="absolute inset-0 flex items-start justify-center pt-16 px-6 [mask-image:linear-gradient(to_bottom,transparent_0%,#000_10%,#000_60%,transparent_100%)]">
+        <div className="flex w-full max-w-[200px] flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between text-xs font-medium">
+              <span className="text-gray-500 dark:text-gray-400">This Week</span>
+              <span className="font-bold text-green-600 dark:text-green-400">+12%</span>
+            </div>
+            <div className="h-2.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
+              <div className="h-full w-[85%] rounded-full bg-gradient-to-r from-green-400 to-green-600 shadow-lg shadow-green-500/50"></div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between text-xs font-medium">
+              <span className="text-gray-500 dark:text-gray-400">Accuracy</span>
+              <span className="font-bold text-blue-600 dark:text-blue-400">92%</span>
+            </div>
+            <div className="h-2.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
+              <div className="h-full w-[92%] rounded-full bg-gradient-to-r from-blue-400 to-blue-600 shadow-lg shadow-blue-500/50"></div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between text-xs font-medium">
+              <span className="text-gray-500 dark:text-gray-400">Completed</span>
+              <span className="font-bold text-purple-600 dark:text-purple-400">47/50</span>
+            </div>
+            <div className="h-2.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
+              <div className="h-full w-[94%] rounded-full bg-gradient-to-r from-purple-400 to-purple-600 shadow-lg shadow-purple-500/50"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     ),
   },
 ];

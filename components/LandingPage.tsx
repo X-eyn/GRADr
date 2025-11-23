@@ -13,9 +13,9 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false, onNavigateHome }) => {
   return (
-    <div className="min-h-screen bg-black text-white relative font-sans selection:bg-white selection:text-black overflow-hidden flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-black text-white relative font-sans selection:bg-white selection:text-black overflow-x-hidden">
       {/* ColorBends Background */}
-      <div style={{ width: '100%', height: '100vh', position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
+      <div style={{ width: '100%', height: '100vh', position: 'fixed', top: 0, left: 0, zIndex: 0 }}>
         <ColorBends
           colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
           rotation={30}
@@ -30,7 +30,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false, 
         />
       </div>
 
-      <div className="z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center gap-12">
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="text-center px-4 max-w-5xl mx-auto flex flex-col items-center gap-12 pt-20 pb-12">
         {/* Hero Section */}
         <div className="animate-fade-in-down space-y-6 flex flex-col items-center">
           <div className="mb-4">
@@ -110,21 +111,38 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false, 
         </HoverBorderGradient>
 
         {/* Bento Grid Features */}
-        <div className="w-full mt-16 max-w-7xl">
+        <div className="w-full mt-16 max-w-7xl px-4 pb-8">
             <BentoDemo />
         </div>
+        </div>
+
+        {/* Spacer for smooth transition */}
+        <div className="w-full h-24 bg-gradient-to-b from-transparent to-black/30"></div>
+
+        {/* Footer with gradient fade-in */}
+        <footer className="relative w-full mt-auto">
+          {/* Gradient overlay for smooth transition */}
+          <div className="absolute inset-x-0 -top-32 h-32 bg-gradient-to-b from-transparent to-black/50 pointer-events-none"></div>
+          
+          <div className="relative border-t border-white/5 bg-black/20 backdrop-blur-sm">
+            <div className="max-w-7xl mx-auto px-4 py-8 text-center">
+              <p className="text-neutral-500 text-sm font-light">
+                © {new Date().getFullYear()} GRAD<span style={{ 
+                  fontSize: '0.85em', 
+                  fontStyle: 'italic',
+                  background: 'linear-gradient(135deg, #00ffd1, #8a5cff)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}>r</span> AI. All rights reserved.
+              </p>
+              <p className="text-neutral-600 text-xs mt-2">
+                Powered by advanced AI • Instant grading for students worldwide
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
-      
-      <footer className="absolute bottom-6 text-neutral-600 text-sm font-light">
-        © {new Date().getFullYear()} GRAD<span style={{ 
-          fontSize: '0.85em', 
-          fontStyle: 'italic',
-          background: 'linear-gradient(135deg, #00ffd1, #8a5cff)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text'
-        }}>r</span> AI. All rights reserved.
-      </footer>
     </div>
   );
 };
