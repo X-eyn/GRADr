@@ -3,6 +3,7 @@ import { FlipWords } from './ui/flip-words';
 import { HoverBorderGradient } from './ui/hover-border-gradient';
 import { Sparkles } from './ui/sparkles';
 import ColorBends from './ColorBends';
+import { BentoDemo } from './BentoDemo';
 
 interface LandingPageProps {
   onStart: () => void;
@@ -108,31 +109,9 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false, 
           </span>
         </HoverBorderGradient>
 
-        {/* Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 w-full">
-            <div className="min-h-[200px] rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300">
-                <div className="flex flex-col items-center justify-center text-center p-6 h-full gap-4">
-                    <div className="text-3xl">🚀</div>
-                    <h3 className="text-xl font-medium">Instant Analysis</h3>
-                    <p className="text-sm text-neutral-400">Get feedback in seconds powered by advanced Gemini AI models.</p>
-                </div>
-            </div>
-
-            <div className="min-h-[200px] rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300">
-                <div className="flex flex-col items-center justify-center text-center p-6 h-full gap-4">
-                    <div className="text-3xl">✍️</div>
-                    <h3 className="text-xl font-medium">Handwriting Recognition</h3>
-                    <p className="text-sm text-neutral-400">Deciphers complex handwriting with high accuracy.</p>
-                </div>
-            </div>
-
-            <div className="min-h-[200px] rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300">
-                <div className="flex flex-col items-center justify-center text-center p-6 h-full gap-4">
-                    <div className="text-3xl">🎯</div>
-                    <h3 className="text-xl font-medium">Detailed Feedback</h3>
-                    <p className="text-sm text-neutral-400">Receive comprehensive grading and suggestions for improvement.</p>
-                </div>
-            </div>
+        {/* Bento Grid Features */}
+        <div className="w-full mt-16 max-w-7xl">
+            <BentoDemo />
         </div>
       </div>
       
