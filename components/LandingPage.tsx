@@ -4,6 +4,7 @@ import { HoverBorderGradient } from './ui/hover-border-gradient';
 import { Sparkles } from './ui/sparkles';
 import ColorBends from './ColorBends';
 import { BentoDemo } from './BentoDemo';
+import { Highlighter } from './ui/highlighter';
 
 interface LandingPageProps {
   onStart: () => void;
@@ -76,10 +77,17 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false, 
           </div>
           <div className="text-xl md:text-2xl text-neutral-400 font-coolvetica max-w-2xl mx-auto leading-relaxed flex flex-col gap-2">
             <p>
-              Transform handwriting into graded feedback instantly. 
+              Transform{" "}
+              <Highlighter action="underline" color="#FF9800" animationDuration={2000} padding={6}>
+                handwriting
+              </Highlighter>{" "}
+              into graded feedback instantly. 
             </p>
             <p>
-              Experience the next generation of assessment.
+              Experience the next generation of{" "}
+              <Highlighter action="circle" color="#8a5cff" animationDuration={2000} padding={8}>
+                assessment
+              </Highlighter>.
             </p>
             <div className="flex items-center justify-center gap-2 mt-4 text-xl md:text-2xl font-coolvetica text-neutral-400">
               <span>Grade your</span>
