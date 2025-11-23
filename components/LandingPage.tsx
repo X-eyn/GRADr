@@ -5,6 +5,7 @@ import { Sparkles } from './ui/sparkles';
 import ColorBends from './ColorBends';
 import { BentoDemo } from './BentoDemo';
 import { Highlighter } from './ui/highlighter';
+import { InfiniteSliderBasic } from './InfiniteSliderBasic';
 
 interface LandingPageProps {
   onStart: () => void;
@@ -124,8 +125,13 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false, 
         </div>
         </div>
 
+        {/* AI Models Infinite Slider */}
+        <div className="w-full max-w-7xl px-4 mt-8">
+          <InfiniteSliderBasic />
+        </div>
+
         {/* Spacer for smooth transition */}
-        <div className="w-full h-24 bg-gradient-to-b from-transparent to-black/30"></div>
+        <div className="w-full h-16 bg-gradient-to-b from-transparent to-black/30"></div>
 
         {/* Footer with gradient fade-in */}
         <footer className="relative w-full mt-auto">
