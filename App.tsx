@@ -32,19 +32,19 @@ const App: React.FC = () => {
   const getComponent = () => {
     switch (view) {
       case 'home':
-        return <LandingPage onStart={() => setView('biology')} isMenuOpen={isMenuOpen} />;
+        return <LandingPage onStart={() => setView('biology')} isMenuOpen={isMenuOpen} onNavigateHome={() => handleNavigate('home')} />;
       case 'biology':
-        return <Grader subject="Biology" />;
+        return <Grader subject="Biology" onNavigateHome={() => handleNavigate('home')} />;
       case 'physics':
-        return <Grader subject="Physics" />;
+        return <Grader subject="Physics" onNavigateHome={() => handleNavigate('home')} />;
       case 'chemistry':
-        return <Grader subject="Chemistry" />;
+        return <Grader subject="Chemistry" onNavigateHome={() => handleNavigate('home')} />;
       case 'english':
-        return <Grader subject="English" />;
+        return <Grader subject="English" onNavigateHome={() => handleNavigate('home')} />;
       case 'about':
-        return <About />;
+        return <About onNavigateHome={() => handleNavigate('home')} />;
       default:
-        return <LandingPage onStart={() => setView('biology')} isMenuOpen={isMenuOpen} />;
+        return <LandingPage onStart={() => setView('biology')} isMenuOpen={isMenuOpen} onNavigateHome={() => handleNavigate('home')} />;
     }
   };
 

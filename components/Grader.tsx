@@ -6,9 +6,10 @@ import { AppStatus, AssessmentResult } from '../types';
 
 interface GraderProps {
   subject?: string;
+  onNavigateHome?: () => void;
 }
 
-const Grader: React.FC<GraderProps> = ({ subject = 'General' }) => {
+const Grader: React.FC<GraderProps> = ({ subject = 'General', onNavigateHome }) => {
   const [status, setStatus] = useState<AppStatus>(AppStatus.IDLE);
   const [result, setResult] = useState<AssessmentResult | null>(null);
   const [errorMsg, setErrorMsg] = useState<string>('');
@@ -45,8 +46,9 @@ const Grader: React.FC<GraderProps> = ({ subject = 'General' }) => {
              <img 
                src="/assets/logos/logo.png" 
                alt="GRADr Logo" 
-               className="h-20 w-auto" 
+               className="h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity" 
                style={{ filter: 'brightness(0) invert(1)' }}
+               onClick={onNavigateHome}
              />
           </div>
           <div className="inline-flex items-center justify-center p-4 border border-white/20 rounded-full mb-8">
@@ -58,8 +60,17 @@ const Grader: React.FC<GraderProps> = ({ subject = 'General' }) => {
               {subject === 'General' && '📝'}
             </span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 pb-2 font-lemon-milk">
-            GRADr <span className="text-neutral-500 font-coolvetica font-light text-3xl md:text-5xl block md:inline mt-2 md:mt-0 md:ml-4">{subject}</span>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 pb-2 font-lemon-milk pr-4">
+            GRAD<span style={{ 
+              fontSize: '0.7em', 
+              fontStyle: 'italic',
+              background: 'linear-gradient(135deg, #00ffd1, #8a5cff)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              opacity: 0.9,
+              paddingRight: '0.2em'
+            }}>r</span> <span className="text-neutral-500 font-coolvetica font-light text-3xl md:text-5xl block md:inline mt-2 md:mt-0 md:ml-4">{subject}</span>
           </h1>
           <p className="text-xl text-neutral-400 max-w-2xl mx-auto font-coolvetica leading-relaxed">
             Upload your {subject === 'General' ? '' : subject} homework or exam paper. 

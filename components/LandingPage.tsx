@@ -1,14 +1,34 @@
 import React from 'react';
-import RotatingText from './RotatingText';
+import { FlipWords } from './ui/flip-words';
+import { HoverBorderGradient } from './ui/hover-border-gradient';
+import { Sparkles } from './ui/sparkles';
+import ColorBends from './ColorBends';
 
 interface LandingPageProps {
   onStart: () => void;
   isMenuOpen?: boolean;
+  onNavigateHome?: () => void;
 }
 
-const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false }) => {
+const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false, onNavigateHome }) => {
   return (
     <div className="min-h-screen bg-black text-white relative font-sans selection:bg-white selection:text-black overflow-hidden flex flex-col items-center justify-center">
+      {/* ColorBends Background */}
+      <div style={{ width: '100%', height: '100vh', position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
+        <ColorBends
+          colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
+          rotation={30}
+          speed={0.3}
+          scale={1.2}
+          frequency={1.4}
+          warpStrength={1.2}
+          mouseInfluence={0.8}
+          parallax={0.6}
+          noise={0.08}
+          transparent
+        />
+      </div>
+
       <div className="z-10 text-center px-4 max-w-5xl mx-auto flex flex-col items-center gap-12">
         {/* Hero Section */}
         <div className="animate-fade-in-down space-y-6 flex flex-col items-center">
@@ -16,13 +36,42 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false }
             <img 
               src="/assets/logos/logo.png" 
               alt="GRADr Logo" 
-              className="h-24 w-auto"
+              className="h-24 w-auto cursor-pointer hover:opacity-80 transition-opacity"
               style={{ filter: 'brightness(0) invert(1)' }}
+              onClick={onNavigateHome}
             />
           </div>
-          <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 pb-2 font-lemon-milk">
-            GRADr
-          </h1>
+          <div className="flex flex-col items-center w-full">
+            <Sparkles
+              background="transparent"
+              minSize={0.6}
+              maxSize={1.4}
+              speed={4}
+              particleColor="#FFFFFF"
+              particleDensity={80}
+              className="w-full"
+            >
+              <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 pb-2 font-lemon-milk pr-4">
+                GRAD<span style={{ 
+                  fontSize: '0.7em', 
+                  fontStyle: 'italic',
+                  background: 'linear-gradient(135deg, #00ffd1, #8a5cff)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  opacity: 0.9,
+                  paddingRight: '0.2em'
+                }}>r</span>
+              </h1>
+            </Sparkles>
+            {/* Gradient Glow Line */}
+            <div className="relative w-full max-w-[40rem] h-[5px] mt-4">
+              <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm"></div>
+              <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4"></div>
+              <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm"></div>
+              <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4"></div>
+            </div>
+          </div>
           <div className="text-xl md:text-2xl text-neutral-400 font-coolvetica max-w-2xl mx-auto leading-relaxed flex flex-col gap-2">
             <p>
               Transform handwriting into graded feedback instantly. 
@@ -32,18 +81,10 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false }
             </p>
             <div className="flex items-center justify-center gap-2 mt-4 text-xl md:text-2xl font-coolvetica text-neutral-400">
               <span>Grade your</span>
-              <RotatingText
-                texts={['Biology', 'Physics', 'English', 'Chemistry']}
-                mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-                staggerFrom={"first"}
-                initial={{ y: "100%", opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: "-100%", opacity: 0 }}
-                staggerDuration={0.01}
-                splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                rotationInterval={2500}
-                auto={!isMenuOpen}
+              <FlipWords
+                words={['Biology', 'Physics', 'English', 'Chemistry']}
+                duration={2500}
+                className="font-coolvetica text-xl md:text-2xl text-white"
               />
               <span>Scripts</span>
             </div>
@@ -51,17 +92,21 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false }
         </div>
 
         {/* CTA Button */}
-        <button
+        <HoverBorderGradient
           onClick={onStart}
-          className="group relative px-8 py-4 bg-white text-black rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_-15px_rgba(255,255,255,0.5)]"
+          containerClassName="hover:scale-105 transition-all duration-300"
+          className="group bg-transparent text-white font-semibold text-lg px-8 py-4"
+          as="button"
+          duration={1}
+          clockwise={true}
         >
-          <span className="relative z-10 flex items-center gap-2">
+          <span className="flex items-center gap-2">
             Get Started Now
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </span>
-        </button>
+        </HoverBorderGradient>
 
         {/* Feature Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 w-full">
@@ -92,7 +137,14 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false }
       </div>
       
       <footer className="absolute bottom-6 text-neutral-600 text-sm font-light">
-        © {new Date().getFullYear()} GRADr AI. All rights reserved.
+        © {new Date().getFullYear()} GRAD<span style={{ 
+          fontSize: '0.85em', 
+          fontStyle: 'italic',
+          background: 'linear-gradient(135deg, #00ffd1, #8a5cff)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text'
+        }}>r</span> AI. All rights reserved.
       </footer>
     </div>
   );

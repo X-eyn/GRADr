@@ -403,7 +403,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
       </div>
 
       <header className="staggered-menu-header" aria-label="Main navigation header">
-        <div className="sm-logo" aria-label="Logo">
+        <div 
+          className="sm-logo cursor-pointer hover:opacity-80 transition-opacity" 
+          aria-label="Logo"
+          onClick={() => onNavigate?.('home')}
+          style={{ pointerEvents: 'auto' }}
+        >
           {logoUrl ? (
              <img
              src={logoUrl}
@@ -414,7 +419,17 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
              height={24}
            />
           ) : (
-             <span className="text-xl font-bold tracking-tight">GRADr</span>
+             <span className="text-xl font-bold tracking-tight">
+               GRAD<span style={{ 
+                 fontSize: '0.7em', 
+                 fontStyle: 'italic',
+                 background: 'linear-gradient(135deg, #00ffd1, #8a5cff)',
+                 WebkitBackgroundClip: 'text',
+                 WebkitTextFillColor: 'transparent',
+                 backgroundClip: 'text',
+                 opacity: 0.9
+               }}>r</span>
+             </span>
           )}
          
         </div>
