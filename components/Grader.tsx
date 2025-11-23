@@ -3,6 +3,7 @@ import ImageUpload from './ImageUpload';
 import ResultCard from './ResultCard';
 import { analyzeScript } from '../services/geminiService';
 import { AppStatus, AssessmentResult } from '../types';
+import GradientText from './GradientText';
 
 interface GraderProps {
   subject?: string;
@@ -60,7 +61,7 @@ const Grader: React.FC<GraderProps> = ({ subject = 'General', onNavigateHome }) 
               {subject === 'General' && '📝'}
             </span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 pb-2 font-lemon-milk pr-4">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500 pb-2 font-lemon-milk pr-4 overflow-visible">
             GRAD<span style={{ 
               fontSize: '0.7em', 
               fontStyle: 'italic',
@@ -70,7 +71,45 @@ const Grader: React.FC<GraderProps> = ({ subject = 'General', onNavigateHome }) 
               backgroundClip: 'text',
               opacity: 0.9,
               paddingRight: '0.2em'
-            }}>r</span> <span className="text-neutral-500 font-coolvetica font-light text-3xl md:text-5xl block md:inline mt-2 md:mt-0 md:ml-4">{subject}</span>
+            }}>r</span> {subject === 'Biology' ? (
+              <GradientText
+                colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+                animationSpeed={3}
+                showBorder={false}
+                className="text-3xl md:text-5xl inline-block mt-0 md:ml-4 font-coolvetica font-light"
+              >
+                {subject}
+              </GradientText>
+            ) : subject === 'Chemistry' ? (
+              <GradientText
+                colors={["#00e676", "#76ff03", "#00e676", "#76ff03", "#00e676"]}
+                animationSpeed={3}
+                showBorder={false}
+                className="text-3xl md:text-5xl inline-block mt-0 md:ml-4 font-coolvetica font-light"
+              >
+                {subject}
+              </GradientText>
+            ) : subject === 'Physics' ? (
+              <GradientText
+                colors={["#ff4757", "#ff8a80", "#ff4757", "#ff8a80", "#ff4757"]}
+                animationSpeed={3}
+                showBorder={false}
+                className="text-3xl md:text-5xl inline-block mt-0 md:ml-4 font-coolvetica font-light"
+              >
+                {subject}
+              </GradientText>
+            ) : subject === 'English' ? (
+              <GradientText
+                colors={["#ffa500", "#ffed4e", "#ffa500", "#ffed4e", "#ffa500"]}
+                animationSpeed={3}
+                showBorder={false}
+                className="text-3xl md:text-5xl inline-block mt-0 md:ml-4 font-coolvetica font-light"
+              >
+                {subject}
+              </GradientText>
+            ) : (
+              <span className="text-neutral-500 font-coolvetica font-light text-3xl md:text-5xl block md:inline mt-2 md:mt-0 md:ml-4">{subject}</span>
+            )}
           </h1>
           <p className="text-xl text-neutral-400 max-w-2xl mx-auto font-coolvetica leading-relaxed">
             Upload your {subject === 'General' ? '' : subject} homework or exam paper. 
