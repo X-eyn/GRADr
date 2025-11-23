@@ -33,27 +33,8 @@ const assessmentSchema: Schema = {
   required: ["grade", "score", "reasoning", "extractedText", "correctedText", "feedback"],
 };
 
-export const analyzeScript = async (base64Image: string): Promise<AssessmentResult> => {
-  const apiKey = process.env.API_KEY;
-  if (!apiKey) {
-    throw new Error("API Key is missing.");
-  }
-
-  const ai = new GoogleGenAI({ apiKey });
-
-  try {
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: {
-        parts: [
-          {
-            inlineData: {
-              mimeType: "image/jpeg", // Assuming JPEG for simplicity, works with PNG too usually
-              data: base64Image,
-            },
-          },
-          {
-            text: `You are an expert academic grader and copy editor. 
+const SYSTEM_PROMPTS: Record<string, string> = {
+  default: `You are an expert academic grader and copy editor. 
             Analyze the provided image which contains a question and an answer (or just text).
             1. Transcribe the answer exactly as written, including any spelling or grammar mistakes, into 'extractedText'.
             2. Create a corrected version of the answer with perfect grammar and spelling in 'correctedText'.
@@ -62,13 +43,77 @@ export const analyzeScript = async (base64Image: string): Promise<AssessmentResu
             5. Provide a letter grade.
             6. Explain your reasoning.
             7. Give 2 sentences of encouraging but constructive feedback.`,
+  
+  Biology: `You are an expert Biology professor and grader.
+            Analyze the provided image containing a Biology answer.
+            1. Transcribe the answer exactly into 'extractedText'.
+            2. Create a corrected version in 'correctedText'. Ensure biological terminology, scientific names (italicized/underlined rules), and process descriptions are accurate.
+            3. Grade based on: correctness of biological concepts, use of correct terminology, diagrams (if any), and depth of understanding.
+            4. Provide a score out of 10.
+            5. Provide a letter grade.
+            6. Explain reasoning, specifically pointing out misconceptions or excellent use of biological principles.
+            7. Give 2 sentences of feedback focused on biological understanding and scientific communication.`,
+
+  Physics: `You are an expert Physics professor and grader.
+            Analyze the provided image containing a Physics answer.
+            1. Transcribe the answer exactly into 'extractedText'.
+            2. Create a corrected version in 'correctedText'. Focus on correcting formulas, units, derivations, and physical laws.
+            3. Grade based on: conceptual understanding, correct application of laws/formulas, proper use of units (SI), and logical steps in derivation/calculation.
+            4. Provide a score out of 10.
+            5. Provide a letter grade.
+            6. Explain reasoning, highlighting errors in logic, calculation, or units.
+            7. Give 2 sentences of feedback focused on problem-solving approach and physical intuition.`,
+
+  Chemistry: `You are an expert Chemistry professor and grader.
+            Analyze the provided image containing a Chemistry answer.
+            1. Transcribe the answer exactly into 'extractedText'.
+            2. Create a corrected version in 'correctedText'. Ensure chemical equations are balanced, formulas are correct, and reaction mechanisms are accurate.
+            3. Grade based on: stoichiometric accuracy, knowledge of periodic trends, bonding, and chemical correctness.
+            4. Provide a score out of 10.
+            5. Provide a letter grade.
+            6. Explain reasoning, checking for balanced equations and correct state symbols.
+            7. Give 2 sentences of feedback focused on chemical principles and precision.`,
+
+  English: `You are an expert English Literature and Language professor.
+            Analyze the provided image containing an English assignment (essay, grammar, or literature analysis).
+            1. Transcribe the answer exactly into 'extractedText'.
+            2. Create a corrected version in 'correctedText'. Improve grammar, vocabulary, flow, and sentence structure while maintaining the original voice if possible.
+            3. Grade based on: grammar, syntax, vocabulary, coherence, cohesion, and literary analysis depth (if applicable).
+            4. Provide a score out of 10.
+            5. Provide a letter grade.
+            6. Explain reasoning, focusing on writing style and command of language.
+            7. Give 2 sentences of feedback focused on improving writing style and expression.`
+};
+
+export const analyzeScript = async (base64Image: string, subject: string = 'default'): Promise<AssessmentResult> => {
+  const apiKey = process.env.API_KEY;
+  if (!apiKey) {
+    throw new Error("API Key is missing.");
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
+  const prompt = SYSTEM_PROMPTS[subject] || SYSTEM_PROMPTS['default'];
+
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: {
+        parts: [
+          {
+            inlineData: {
+              mimeType: "image/jpeg",
+              data: base64Image,
+            },
+          },
+          {
+            text: prompt,
           },
         ],
       },
       config: {
         responseMimeType: "application/json",
         responseSchema: assessmentSchema,
-        temperature: 0.2, // Low temperature for more deterministic/accurate grading
+        temperature: 0.2,
       },
     });
 
