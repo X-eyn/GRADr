@@ -23,6 +23,7 @@ const socialItems = [
 
 const App: React.FC = () => {
   const [view, setView] = useState<ViewState>('home');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavigate = (link: string) => {
     setView(link as ViewState);
@@ -31,7 +32,7 @@ const App: React.FC = () => {
   const getComponent = () => {
     switch (view) {
       case 'home':
-        return <LandingPage onStart={() => setView('biology')} />;
+        return <LandingPage onStart={() => setView('biology')} isMenuOpen={isMenuOpen} />;
       case 'biology':
         return <Grader subject="Biology" />;
       case 'physics':
@@ -43,7 +44,7 @@ const App: React.FC = () => {
       case 'about':
         return <About />;
       default:
-        return <LandingPage onStart={() => setView('biology')} />;
+        return <LandingPage onStart={() => setView('biology')} isMenuOpen={isMenuOpen} />;
     }
   };
 
@@ -64,6 +65,8 @@ const App: React.FC = () => {
             logoUrl="/assets/logos/logo.png"
             accentColor="#ff6b6b"
             onNavigate={handleNavigate}
+            onMenuOpen={() => setIsMenuOpen(true)}
+            onMenuClose={() => setIsMenuOpen(false)}
           />
       </div>
 
