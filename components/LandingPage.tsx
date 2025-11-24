@@ -6,6 +6,7 @@ import ColorBends from './ColorBends';
 import { BentoDemo } from './BentoDemo';
 import { Highlighter } from './ui/highlighter';
 import { InfiniteSliderBasic } from './InfiniteSliderBasic';
+import Stepper, { Step } from './Stepper';
 
 interface LandingPageProps {
   onStart: () => void;
@@ -123,6 +124,65 @@ const LandingPage: React.FC<LandingPageProps> = ({ onStart, isMenuOpen = false, 
         <div className="w-full mt-16 max-w-7xl px-4 pb-8">
             <BentoDemo />
         </div>
+        </div>
+
+        {/* Stepper Demo - How It Works */}
+        <div className="w-full max-w-7xl px-4 mt-16 text-white">
+          <h2 className="text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500">
+            How It Works
+          </h2>
+           <Stepper
+              initialStep={1}
+              onStepChange={(step) => {
+                console.log(step);
+              }}
+              onFinalStepCompleted={() => console.log("All steps completed!")}
+              backButtonText="Previous"
+              nextButtonText="Next"
+            >
+              <Step>
+                <div className="flex flex-col items-center text-center">
+                  <div className="text-5xl mb-4">📸</div>
+                  <h2 className="text-2xl font-bold mb-3">Step 1: Capture Your Script</h2>
+                  <p className="text-neutral-300 text-lg">Take a clear photo of your handwritten answer script using your phone or camera.</p>
+                </div>
+              </Step>
+              <Step>
+                <div className="flex flex-col items-center text-center">
+                  <div className="text-5xl mb-4">📚</div>
+                  <h2 className="text-2xl font-bold mb-3">Step 2: Choose Your Subject</h2>
+                  <p className="text-neutral-300 text-lg mb-4">Navigate to the AI grader for your subject:</p>
+                  <div className="flex flex-wrap gap-3 justify-center">
+                    <span className="px-4 py-2 bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-500/50 rounded-full text-sm">Biology</span>
+                    <span className="px-4 py-2 bg-gradient-to-r from-blue-500/20 to-blue-600/20 border border-blue-500/50 rounded-full text-sm">Physics</span>
+                    <span className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-purple-600/20 border border-purple-500/50 rounded-full text-sm">Chemistry</span>
+                    <span className="px-4 py-2 bg-gradient-to-r from-orange-500/20 to-orange-600/20 border border-orange-500/50 rounded-full text-sm">English</span>
+                  </div>
+                </div>
+              </Step>
+              <Step>
+                <div className="flex flex-col items-center text-center">
+                  <div className="text-5xl mb-4">📤</div>
+                  <h2 className="text-2xl font-bold mb-3">Step 3: Upload Your Image</h2>
+                  <p className="text-neutral-300 text-lg mb-4">Upload the photo of your script to the selected subject grader.</p>
+                  <div className="w-full max-w-md p-6 border-2 border-dashed border-neutral-600 rounded-lg bg-neutral-900/50">
+                    <p className="text-neutral-400 text-sm">Drag & drop or click to upload</p>
+                  </div>
+                </div>
+              </Step>
+              <Step>
+                <div className="flex flex-col items-center text-center">
+                  <div className="text-5xl mb-4">✨</div>
+                  <h2 className="text-2xl font-bold mb-3">Step 4: Get Instant Feedback</h2>
+                  <p className="text-neutral-300 text-lg mb-4">Receive detailed evaluation and feedback powered by advanced AI models.</p>
+                  <div className="w-full max-w-md p-4 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/30 rounded-lg">
+                    <p className="text-sm text-neutral-300">✓ Graded score</p>
+                    <p className="text-sm text-neutral-300">✓ Detailed feedback</p>
+                    <p className="text-sm text-neutral-300">✓ Areas for improvement</p>
+                  </div>
+                </div>
+              </Step>
+            </Stepper>
         </div>
 
         {/* AI Models Infinite Slider */}
